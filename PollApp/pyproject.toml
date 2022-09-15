@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "pollapp"
+version = "0.1.0"
+description = "a simple polls app just like the one in Django"
+authors = ["dukelester <dukelester4@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.85.0"
+uvicorn = "^0.18.3"
+
+[tool.poetry.group.dev.dependencies]
+uvicorn = "^0.18.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
