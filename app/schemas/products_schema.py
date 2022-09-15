@@ -4,12 +4,12 @@ from uuid import UUID
 
 class ProductsSchema(BaseModel):
     product_id: UUID
-    product_title: constr(100)
-    description: constr(1000)
+    product_title: constr()
+    description: constr()
     category: str
     price: float
     quantity_in_stock: int | None = None
-    tags: list[str] | None = None
+    # tags: list[str] | None = None
     created_at: datetime
     isActive: bool
     
@@ -49,13 +49,24 @@ class ProductsSchema(BaseModel):
             raise ValueError('Invalid price ')
         return price
     
-    @validator("tags")
-    def validate_tags(cls, tags):
-        if len(tags) == 0:
-            raise ValueError("The tags can't be empty")
-        if type(tags) != list:
-            raise ValueError("Invalid data passed")
-        return tags
+    # @validator("tags")
+    # def validate_tags(cls, tags):
+    #     if len(tags) == 0:
+    #         raise ValueError("The tags can't be empty")
+    #     if type(tags) != list:
+    #         raise ValueError("Invalid data passed")
+    #     return tags
+    @validator("isActive")
+    def validate_isActive(cls, isActive):
+        if type(isActive) != bool:
+            raise ValueError("Invalid Type")
+        return isActive
+    
+    @validator('quantity_in_stock')
+    def validate_quantity_in_stock(cls, quantity_in_stock):
+        if quantity_in_stock <= 0:
+            raise ValueError("Invalid quantity in stock")
+        return quantity_in_stock
     
     
     

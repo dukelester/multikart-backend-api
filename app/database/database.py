@@ -4,8 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = "postgresql+psycopg2://postgres:postgres@localhost/multikart"
 engine = create_engine(DATABASE_URL)
 
-Session = sessionmaker(autocommit=False, autoflush=True,bind=engine)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False,bind=engine)
 Base = declarative_base()
