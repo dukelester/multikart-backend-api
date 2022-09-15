@@ -4,18 +4,15 @@ from uuid import UUID
 
 class ProductsSchema(BaseModel):
     product_id: UUID
-    product_title: constr()
-    description: constr()
+    product_title: str
+    description: str
     category: str
     price: float
     quantity_in_stock: int | None = None
     # tags: list[str] | None = None
     created_at: datetime
     isActive: bool
-    
-    class Config:
-        orm_mode = True
-        
+
     # validations 
     @validator('product_id')
     def validate_product_id(cls, product_id):
@@ -67,7 +64,8 @@ class ProductsSchema(BaseModel):
         if quantity_in_stock <= 0:
             raise ValueError("Invalid quantity in stock")
         return quantity_in_stock
-    
+    class Config:
+        orm_mode = True
     
     
     

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
-from schemas.products_schema import ProductsSchema
+from app.schemas.products_schema import ProductsSchema
 from sqlalchemy.orm import Session
-from dependencies import database_dependency
-from crud import products_crud
+from app.dependencies import database_dependency
+from app.crud import products_crud
 
 router = APIRouter(
     prefix="/products",
@@ -11,10 +11,9 @@ router = APIRouter(
 
 @router.get("/", tags=['All Products'])
 def allProducts(db: Session = Depends(database_dependency.get_db)):
-    all_products = products_crud.get_all_products(db) 
-    return { " all": all_products }
+    return  products_crud.get_all_products(db) 
 
 @router.post("/", tags=["Add a new Product"], status_code=201, response_model=ProductsSchema)
 def addProduct(*,db: Session = Depends(database_dependency.get_db), product: ProductsSchema):
-    product = products_crud.create_product(db, product)
+    product = products_crud.create_product(db=db, product=product)
     return { "success": product }

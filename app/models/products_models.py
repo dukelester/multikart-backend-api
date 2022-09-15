@@ -1,9 +1,8 @@
 
 from datetime import datetime
-from email.policy import default
 from sqlalchemy import String, Integer, Column, Boolean, ForeignKey, Float,DateTime
 from sqlalchemy.orm import relationship
-from database.database import Base
+from app.database.database import Base
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 

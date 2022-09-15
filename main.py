@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from routes import products_routes
-from models import products_models
-from database.database import engine
+from app.routes import products_routes, rating_routes
+from app.models import products_models
+from app.database.database import engine
 
 allowed_origins = [
     
@@ -17,6 +17,7 @@ app = FastAPI()
 
 
 app.include_router(products_routes.router)
+app.include_router(rating_routes.router)
 
 @app.get("/", tags=["homepage"], summary="the homepage", status_code=200)
 def root():
